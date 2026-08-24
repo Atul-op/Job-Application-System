@@ -1,0 +1,38 @@
+package com.atul.springbootrest.aop;
+
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
+@Aspect
+@Component
+public class LoggingAspect
+{
+    private static final Logger LOGGER = LoggerFactory.getLogger(LoggingAspect.class);
+
+    @Before("execution(* com.atul.springbootrest.service.JobService.*(..))")
+    public void logMethodCalled(JoinPoint jp)
+    {
+        LOGGER.info("Method Called "+jp.getSignature().getName());
+    }
+
+    @After("execution(* com.atul.springbootrest.service.JobService.*(..))")
+    public void logMethodExecuted(JoinPoint jp)
+    {
+        LOGGER.info("Method Executed "+jp.getSignature().getName());
+    }
+
+    @AfterReturning("execution(* com.atul.springbootrest.service.JobService.*(..))")
+    public void logMethodReturning(JoinPoint jp)
+    {
+        LOGGER.info("Method Returned "+jp.getSignature().getName());
+    }
+
+    @AfterThrowing("execution(* com.atul.springbootrest.service.JobService.*(..))")
+    public void logMethodThrow(JoinPoint jp)
+    {
+        LOGGER.info("Method got some problem "+jp.getSignature().getName());
+    }
+}
