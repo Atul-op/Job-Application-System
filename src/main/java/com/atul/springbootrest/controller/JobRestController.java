@@ -1,4 +1,4 @@
-package com.atul.springbootrest;
+package com.atul.springbootrest.controller;
 
 import com.atul.springbootrest.model.JobPost;
 import com.atul.springbootrest.service.JobService;
